@@ -1,0 +1,13 @@
+{
+  "manifest_version": 3,
+  "name": "Reading List Extensions",
+  "description": "Connect your reading list to Notion",
+  "version": "1.0",
+  "action": {
+    "default_popup": "hello.html",
+    "default_icon": "hello_extensions.png"
+  },
+  "host_permissions": [
+    "https://api.notion.com/v1/pages/"
+  ]
+}
