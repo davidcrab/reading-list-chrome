@@ -8,12 +8,17 @@ body {
   border:  10px solid white;
   background: rgb(141, 141, 249);
   padding: 20px;
-  height: 175px;
+  height: 200px;
   width: 300px;
+}
+
+.title {
+  display: flex
 }
 
 h1{
   color : white;
+  font-size: 32px;
 }
 
 /* CSS */
