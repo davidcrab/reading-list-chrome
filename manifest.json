@@ -5,12 +5,24 @@
   "version": "1.0",
   "action": {
     "default_popup": "hello.html",
-    "default_icon": "hello_extensions.png"
+    "default_icon": "save.png",
+    "icons": {
+      "16": "save.png",
+      "32": "save.png",
+      "48": "save.png",
+      "128": "save.png"
+    }
   },
   "permissions": [
     "tabs"
   ],
   "host_permissions": [
     "https://api.notion.com/v1/pages/"
-  ]
+  ],
+  "icons": {
+    "16": "save.png",
+    "32": "save.png",
+    "48": "save.png",
+    "128": "save.png"
+  }
 }

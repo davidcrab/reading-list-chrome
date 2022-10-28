@@ -1,6 +1,3 @@
-console.log("this is a popup!")
-
-// now i need to write the part where buttons trigger functions lol
 
 async function sendToNotion() {
 
@@ -143,7 +140,6 @@ async function getArticleDetails(url, favIconUrl) {
       sendToNotionTwo(parsed.url, parsed.title, parsed.description, parsed.image, favIconUrl)
     })
     .catch(error => console.log('error', error));
-  //sendToNotionTwo(url, resp.t)
 }
 
 function getURL() {
@@ -155,21 +151,34 @@ function getURL() {
     console.log(title)
     console.log(favIconUrl)
     console.log(tabs[0])
-    // call function that uses the url
+
     getArticleDetails(url, favIconUrl)
-    // sendToNotionTwo(url, title)
   });
 }
 
-// fetch("http://api.linkpreview.net/?key=821aca369aeeb18b6a29ffb7a9480feb&q=https://www.cnbc.com/2022/10/27/amazon-amzn-earnings-q3-2022.html")
-//   .then(response => response.text())
-//   .then(result => console.log(result))
-//   .catch(error => console.log('error', error));
+/*
+I need to get the title of the url, 
 
-// watch the button
-document.querySelector('.submit')
-  .addEventListener('click', () => {
+*/
+
+function markAsRead() {
+  // we can get the url
+  // then we can get the article details 
+  // then we can query notion 
+}
+
+
+const submitButton = document.querySelector('.submit')
+
+submitButton.addEventListener('click', () => {
     console.log('clicked submit!');
     getURL()
-   // sendToNotion();
+    submitButton.textContent = "Added!"
   });
+
+const readButton = document.querySelector('.read')
+
+readButton.addEventListener('click', () => {
+  console.log('article has been read!');
+  readButton.textContent = "Updated!"
+});
