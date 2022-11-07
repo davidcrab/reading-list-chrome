@@ -65,11 +65,21 @@ async function sendToNotionTwo(url, title, description, image, icon) {
     redirect: 'follow'
   };
 
+  // we should go to loading, and then we should go to either added or error
   const resp = await fetch("https://api.notion.com/v1/pages/", requestOptions)
     .then(response => response.text())
-    .then(result => console.log(result))
-    .catch(error => console.log('error', error));
+    .then(result =>  {
+      console.log(result)
+      console.log("set the success here");
+      submitButton.textContent = "Added!"
+    })
+    .catch(error =>  {
+      console.log('error', error);
+      submitButton.textContent = "Error!"
+    });
   
+  // so this is undefined
+  console.log(resp)
 }
 
 async function queryForArticle(title) {
@@ -103,6 +113,7 @@ async function queryForArticle(title) {
       let parsedResult = JSON.parse(result)
       console.log(parsedResult.results[0].id)
       markAsRead(parsedResult.results[0].id)
+
     })
     .catch(error => console.log('error', error));
 }
@@ -133,7 +144,10 @@ async function markAsRead(id) {
   
   fetch(("https://api.notion.com/v1/pages/" + id), requestOptions)
     .then(response => response.text())
-    .then(result => console.log(result))
+    .then(result => {
+      console.log(result)
+      readButton.textContent = "Updated!"
+    })
     .catch(error => console.log('error', error));
 }
 
@@ -154,8 +168,9 @@ async function getArticleDetails(url, favIconUrl, action) {
     .catch(error => console.log('error', error));
 }
 
-function getURL(action) {
-  chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
+async function getURL(action) {
+
+  await chrome.tabs.query({active: true, lastFocusedWindow: true}, tabs => {
     let url = tabs[0].url;
     let title = tabs[0].title;
     let favIconUrl = tabs[0].favIconUrl;
@@ -169,17 +184,18 @@ function getURL(action) {
 }
 
 /*
-I need to get the title of the url, 
+To do:
+  1. check if the title is alredy in notion, decide which button to display
+  2. 
 
 */
-
 
 const submitButton = document.querySelector('.submit')
 
 submitButton.addEventListener('click', () => {
     console.log('clicked submit!');
     getURL("add")
-    submitButton.textContent = "Added!"
+    submitButton.textContent = "Loading ..."
   });
 
 const readButton = document.querySelector('.read')
@@ -187,5 +203,5 @@ const readButton = document.querySelector('.read')
 readButton.addEventListener('click', () => {
   console.log('article has been read!');
   getURL("read")
-  readButton.textContent = "Updated!"
+  readButton.textContent = "Loading ..."
 });
